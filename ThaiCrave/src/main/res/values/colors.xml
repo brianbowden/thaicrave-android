@@ -8,6 +8,7 @@
 
     <color name="tc_red">#450007</color>
     <color name="tc_tan">#f3efe0</color>
+    <color name="tc_light_tan">#fffbf7e8</color>
     <color name="tc_dark_red">#ff1d0003</color>
     <color name="tc_green">#217c7e</color>
     <color name="tc_blue">#3399ff</color>

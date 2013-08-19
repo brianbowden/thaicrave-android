@@ -2,7 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context=".LoginActivity"
+    android:background="@color/tc_red">
 
     <ImageView
         android:id="@+id/login_logo"
@@ -10,7 +11,9 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
-        android:src="@drawable/login_logo" />
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:src="@drawable/sketched_logo" />
 
     <TextView
         android:id="@+id/login_swirly_text"
@@ -18,17 +21,17 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/login_logo"
-        android:layout_marginTop="5dp"
         android:gravity="center"
         android:textSize="14sp"
         android:fontFamily="sans-serif-light"
-        android:text="Share your hunger for Thai Smile!" />
+        android:text="Share your hunger for Thai Smile!"
+        android:visibility="gone"/>
 
     <EditText
         android:id="@+id/login_username_et"
         android:layout_width="200dp"
         android:layout_height="50dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/login_swirly_text"
         android:textColor="@color/white"
