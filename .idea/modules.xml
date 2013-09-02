@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ThaiCrave/ThaiCrave.iml" filepath="$PROJECT_DIR$/ThaiCrave/ThaiCrave.iml" />
       <module fileurl="file://$PROJECT_DIR$/ThaiCraveProject.iml" filepath="$PROJECT_DIR$/ThaiCraveProject.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Volley/Volley.iml" filepath="$PROJECT_DIR$/Volley/Volley.iml" />
       <module fileurl="file://$PROJECT_DIR$/thaicrave-android.iml" filepath="$PROJECT_DIR$/thaicrave-android.iml" />
     </modules>
   </component>

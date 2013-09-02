@@ -3,6 +3,7 @@ package com.thaicrave.android;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.app.Activity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +17,10 @@ import com.thaicrave.android.models.Token;
 import com.thaicrave.android.toolbox.GsonRequest;
 import com.thaicrave.android.toolbox.MultiListener;
 import com.thaicrave.android.toolbox.Utils;
+
+import org.json.JSONObject;
+
+import java.io.IOException;
 
 public class LoginActivity extends Activity {
 
@@ -94,7 +99,22 @@ public class LoginActivity extends Activity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 if (error != null) {
-                    Utils.showCenterToast("Error: " + error.networkResponse.toString(), LoginActivity.this);
+                    Log.e("LOGIN", "Error: " + error.getMessage());
+
+                    try {
+                        if (error.networkResponse != null && error.networkResponse.data != null) {
+                            JSONObject resObj = new JSONObject(new String(error.networkResponse.data, "utf-8"));
+                            String message = resObj.getString("message");
+
+                            Utils.showCenterToast(message, LoginActivity.this);
+                        }
+                        else {
+                            Utils.showCenterToast("Unable to log in! Please try again.", LoginActivity.this);
+                        }
+                    } catch (Exception e) {
+                        Log.e("LOGIN", "Error: " + e.getMessage());
+                        Utils.showCenterToast("Unable to log in! Please try again.", LoginActivity.this);
+                    }
                 }
             }
         });

@@ -66,6 +66,7 @@ public class GsonRequest<T> extends Request<T> {
         mParams.put(key, value);
     }
 
+
     @Override
     public Map<String, String> getParams() {
         return this.mParams;
