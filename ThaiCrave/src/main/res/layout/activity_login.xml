@@ -37,6 +37,7 @@
         android:textColor="@color/white"
         android:textColorHint="@color/white_half_transparent"
         android:textCursorDrawable="@null"
+        android:inputType="textEmailAddress"
         android:hint="Username" />
 
     <EditText
@@ -48,6 +49,7 @@
         android:textColor="@color/white"
         android:textColorHint="@color/white_half_transparent"
         android:textCursorDrawable="@null"
+        android:inputType="textPassword"
         android:hint="Password" />
 
     <Button
