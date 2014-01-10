@@ -1,9 +1,10 @@
 buildscript {
     repositories {
         mavenCentral()
+        maven { url 'http://repo1.maven.org/maven2' }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.5.+'
+        classpath 'com.android.tools.build:gradle:0.7.+'
     }
 }
 apply plugin: 'android'
@@ -14,16 +15,32 @@ repositories {
 
 dependencies {
     compile 'com.android.support:support-v4:13.0.+'
-    compile files('libs/gson-2.2.4.jar')
-    compile project(':Volley')
+    compile fileTree(dir: 'libs', include: '*.jar')
+    compile 'com.mcxiaoke.volley:library:1.0.+'
 }
 
 android {
-    compileSdkVersion 17
-    buildToolsVersion "17.0.0"
+    compileSdkVersion 19
+    buildToolsVersion "19.0.0"
 
     defaultConfig {
         minSdkVersion 14
-        targetSdkVersion 17
+        targetSdkVersion 19
+    }
+
+    sourceSets {
+        main {
+            manifest.srcFile 'AndroidManifest.xml'
+        }
+
+        packagingOptions {
+            exclude 'META-INF/DEPENDENCIES'
+            exclude 'META-INF/NOTICE'
+            exclude 'META-INF/LICENSE'
+            exclude 'META-INF/LICENSE.txt'
+            exclude 'META-INF/NOTICE.txt'
+        }
+
+        instrumentTest.setRoot('tests')
     }
 }

@@ -21,69 +21,51 @@ import com.google.gson.JsonSyntaxException;
 
 import com.android.volley.NetworkResponse;
 import com.android.volley.ParseError;
-import com.android.volley.Request;
+import com.android.volley.toolbox.JsonRequest;
 import com.android.volley.Response;
 import com.android.volley.toolbox.HttpHeaderParser;
 
 import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
-import java.util.Map;
 
 
-public class GsonRequest<T> extends Request<T> {
-    private final Gson mGson;
+public class GsonRequest<T> extends JsonRequest<T> {
+
+    private static Gson sGson;
+
+    private static Gson getGson() {
+        if (sGson == null) {
+            sGson = new Gson();
+        }
+
+        return sGson;
+    }
+
     private final Class<T> mClazz;
-    private final Map<String, String> mParams;
+    private final Object mRequest;
     private final MultiListener<T> mMultiListener;
 
-
     public GsonRequest(int method,
                        String url,
+                       Object request,
                        Class<T> clazz,
                        MultiListener<T> multiListener) {
-        super(method, url, multiListener.getErrorListener());
-        this.mClazz = clazz;
-        this.mMultiListener = multiListener;
-        this.mParams = new HashMap<String, String>();
-        mGson = new Gson();
+        super(method, url, getGson().toJson(request), multiListener.getSuccessListener(), multiListener.getErrorListener());
+
+        mClazz = clazz;
+        mMultiListener = multiListener;
+        mRequest = request;
     }
-
-
-    public GsonRequest(int method,
-                       String url,
-                       Class<T> clazz,
-                       MultiListener<T> multiListener,
-                       Gson gson) {
-        super(method, url, multiListener.getErrorListener());
-        this.mClazz = clazz;
-        this.mMultiListener = multiListener;
-        this.mParams = new HashMap<String, String>();
-        mGson = gson;
-    }
-
-
-    public void addParam(String key, String value) {
-        mParams.put(key, value);
-    }
-
-
-    @Override
-    public Map<String, String> getParams() {
-        return this.mParams;
-    }
-
 
     @Override
     protected void deliverResponse(T response) {
         mMultiListener.getSuccessListener().onResponse(response);
     }
 
-
     @Override
     protected Response<T> parseNetworkResponse(NetworkResponse response) {
         try {
             String json = new String(response.data, HttpHeaderParser.parseCharset(response.headers));
-            return Response.success(mGson.fromJson(json, mClazz),
+            return Response.success(getGson().fromJson(json, mClazz),
                     HttpHeaderParser.parseCacheHeaders(response));
         } catch (UnsupportedEncodingException e) {
             return Response.error(new ParseError(e));

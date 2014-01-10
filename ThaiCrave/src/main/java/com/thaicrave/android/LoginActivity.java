@@ -14,13 +14,12 @@ import com.android.volley.Request;
 import com.android.volley.VolleyError;
 import com.thaicrave.android.app.Volleyball;
 import com.thaicrave.android.models.Token;
+import com.thaicrave.android.models.TokenRequest;
 import com.thaicrave.android.toolbox.GsonRequest;
 import com.thaicrave.android.toolbox.MultiListener;
 import com.thaicrave.android.toolbox.Utils;
 
 import org.json.JSONObject;
-
-import java.io.IOException;
 
 public class LoginActivity extends Activity {
 
@@ -55,15 +54,18 @@ public class LoginActivity extends Activity {
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                TokenRequest tokenReq = new TokenRequest();
+                tokenReq.setEmail(usernameET.getText().toString());
+                tokenReq.setPassword(passwordET.getText().toString());
+
                 GsonRequest<Token> req = new GsonRequest<Token>(
                         Request.Method.POST,
-                        "http://192.168.56.1:3000/api/tokens.json",
+                        "http://192.168.56.1:3000/api/tokens",
+                        tokenReq,
                         Token.class,
                         getTokenListener()
                 );
-
-                req.addParam("email", usernameET.getText().toString());
-                req.addParam("password", passwordET.getText().toString());
 
                 Volleyball.addReq(req);
 
@@ -103,6 +105,8 @@ public class LoginActivity extends Activity {
 
                     try {
                         if (error.networkResponse != null && error.networkResponse.data != null) {
+                            Log.d("LOGIN", "Data: " + new String(error.networkResponse.data, "utf-8"));
+
                             JSONObject resObj = new JSONObject(new String(error.networkResponse.data, "utf-8"));
                             String message = resObj.getString("message");
 
