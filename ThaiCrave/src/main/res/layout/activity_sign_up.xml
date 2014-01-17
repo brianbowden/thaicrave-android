@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/tc_red"
+    android:gravity="center">
+
+
+    <LinearLayout
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <EditText
+            android:id="@+id/sign_up_username_et"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white_half_transparent"
+            android:textCursorDrawable="@null"
+            android:fontFamily="sans-serif-light"
+            android:inputType="textEmailAddress"
+            android:hint="email" />
+
+        <EditText
+            android:id="@+id/sign_up_password_et"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white_half_transparent"
+            android:textCursorDrawable="@null"
+            android:fontFamily="sans-serif-light"
+            android:inputType="textPassword"
+            android:hint="password" />
+
+        <EditText
+            android:id="@+id/sign_up_password_confirmation_et"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white_half_transparent"
+            android:textCursorDrawable="@null"
+            android:fontFamily="sans-serif-light"
+            android:inputType="textPassword"
+            android:hint="confirm password" />
+
+        <Button
+            android:id="@+id/sign_up_submit_button"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/white_login_button"
+            android:textColor="@color/tc_red"
+            android:textStyle="bold"
+            android:text="Let's Eat!" />
+
+    </LinearLayout>
+
+</LinearLayout>

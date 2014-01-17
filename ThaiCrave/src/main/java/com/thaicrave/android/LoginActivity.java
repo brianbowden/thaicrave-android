@@ -78,7 +78,7 @@ public class LoginActivity extends Activity {
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Stuff
+                SignUpActivity.start(LoginActivity.this);
             }
         };
     }
