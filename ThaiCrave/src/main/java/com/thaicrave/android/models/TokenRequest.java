@@ -2,9 +2,6 @@ package com.thaicrave.android.models;
 
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Created by bicxman on 1/9/14.
- */
 public class TokenRequest {
 
     @SerializedName("email")

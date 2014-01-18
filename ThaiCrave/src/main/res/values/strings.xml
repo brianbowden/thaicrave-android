@@ -8,4 +8,7 @@
 
     <string name="main_drawer_open"></string>
     <string name="main_drawer_closed"></string>
+    <string name="login_error_unable_to_log_in">Unable to log in! Please try again.</string>
+    <string name="generic_required">Required</string>
+    <string name="sign_up_error_pass_match">Does not match password</string>
 </resources>

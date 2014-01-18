@@ -14,9 +14,33 @@
         android:gravity="center_horizontal">
 
         <EditText
+            android:id="@+id/sign_up_first_name_et"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white_half_transparent"
+            android:textCursorDrawable="@null"
+            android:fontFamily="sans-serif-light"
+            android:inputType="textNoSuggestions"
+            android:hint="first name" />
+
+        <EditText
+            android:id="@+id/sign_up_last_name_et"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="15dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white_half_transparent"
+            android:textCursorDrawable="@null"
+            android:fontFamily="sans-serif-light"
+            android:inputType="textNoSuggestions"
+            android:hint="last name" />
+
+        <EditText
             android:id="@+id/sign_up_username_et"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:layout_marginTop="15dp"
             android:textColor="@color/white"
             android:textColorHint="@color/white_half_transparent"
             android:textCursorDrawable="@null"
@@ -28,7 +52,7 @@
             android:id="@+id/sign_up_password_et"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             android:textColor="@color/white"
             android:textColorHint="@color/white_half_transparent"
             android:textCursorDrawable="@null"
@@ -40,7 +64,7 @@
             android:id="@+id/sign_up_password_confirmation_et"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             android:textColor="@color/white"
             android:textColorHint="@color/white_half_transparent"
             android:textCursorDrawable="@null"

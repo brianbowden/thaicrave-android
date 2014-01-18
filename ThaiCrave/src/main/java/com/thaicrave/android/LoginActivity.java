@@ -2,7 +2,6 @@ package com.thaicrave.android;
 
 import android.graphics.Paint;
 import android.os.Bundle;
-import android.app.Activity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -12,6 +11,7 @@ import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.VolleyError;
+import com.thaicrave.android.app.TcActivity;
 import com.thaicrave.android.app.Volleyball;
 import com.thaicrave.android.models.Token;
 import com.thaicrave.android.models.TokenRequest;
@@ -21,7 +21,7 @@ import com.thaicrave.android.toolbox.Utils;
 
 import org.json.JSONObject;
 
-public class LoginActivity extends Activity {
+public class LoginActivity extends TcActivity {
 
     private EditText usernameET;
     private EditText passwordET;
@@ -61,7 +61,7 @@ public class LoginActivity extends Activity {
 
                 GsonRequest<Token> req = new GsonRequest<Token>(
                         Request.Method.POST,
-                        "http://192.168.56.1:3000/api/tokens",
+                        Volleyball.getUrl("tokens"),
                         tokenReq,
                         Token.class,
                         getTokenListener()
@@ -78,7 +78,7 @@ public class LoginActivity extends Activity {
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SignUpActivity.start(LoginActivity.this);
+                SignUpActivity.start(CONTEXT);
             }
         };
     }
@@ -94,31 +94,19 @@ public class LoginActivity extends Activity {
             @Override
             public void onResponse(Token token) {
                 if (token != null) {
-                    Utils.showCenterToast(token.getToken(), LoginActivity.this);
+                    Utils.showCenterToast(token.getToken(), CONTEXT);
                 }
             }
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                if (error != null) {
-                    Log.e("LOGIN", "Error: " + error.getMessage());
+                String message = Volleyball.getErrorMessage(error);
 
-                    try {
-                        if (error.networkResponse != null && error.networkResponse.data != null) {
-                            Log.d("LOGIN", "Data: " + new String(error.networkResponse.data, "utf-8"));
-
-                            JSONObject resObj = new JSONObject(new String(error.networkResponse.data, "utf-8"));
-                            String message = resObj.getString("message");
-
-                            Utils.showCenterToast(message, LoginActivity.this);
-                        }
-                        else {
-                            Utils.showCenterToast("Unable to log in! Please try again.", LoginActivity.this);
-                        }
-                    } catch (Exception e) {
-                        Log.e("LOGIN", "Error: " + e.getMessage());
-                        Utils.showCenterToast("Unable to log in! Please try again.", LoginActivity.this);
-                    }
+                if (message != null) {
+                    Log.d("LOGIN", "Data: " + message);
+                    Utils.showCenterToast(message, CONTEXT);
+                } else {
+                    Utils.showCenterToast(getString(R.string.login_error_unable_to_log_in), CONTEXT);
                 }
             }
         });

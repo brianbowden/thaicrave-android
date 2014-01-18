@@ -11,6 +11,8 @@ public class TcApplication extends Application {
     }
 
     private void init() {
+        // Set Environment here
+        TcEnv.init(TcEnv.ENV.LOCAL);
         Volleyball.init(this);
     }
 }
